@@ -55,7 +55,7 @@ if CommandAvailable git; then
     alias gc='git commit'
     alias gco='git checkout'
     alias gd='git diff'
-    alias gl='git log --graph --decorate --all --pretty="%C(auto)%h %d %s (%C(blue)%an%Creset, %C(cyan)%cr%Creset)"'
+    alias gl='git log --graph --decorate --all --pretty="%C(auto)%h%d %s (%C(blue)%an%Creset, %C(cyan)%cr%Creset)"'
     alias gs='git status'
     alias gsq='git commit --amend --no-edit'
     alias gpum='git pull upstream master'
