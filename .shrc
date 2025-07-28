@@ -24,12 +24,7 @@ CommandAvailable()
 # }}}
 # {{{ PATH Manipulation
 
-PrefixPATH "/opt/bb/bin"
-PrefixPATH "/opt/node/bin"
-PrefixPATH "/opt/administration/scripts-general"
-PrefixPATH "${HOME}/.cabal/bin"
 PrefixPATH "${HOME}/bin"
-PrefixPATH "${HOME}/arch/`uname -s`/bin"
 
 # }}}
 # {{{ Aliases
@@ -41,8 +36,6 @@ alias lll='ls -lah --color=auto'
 alias cd..='cd ..'
 alias nano='vim'
 alias vi='vim'
-alias cl='clear'
-alias cpr='rsync --archive --verbose --progress --stats'
 
 if CommandAvailable tmux; then
     alias tmux='tmux -2'
@@ -68,39 +61,6 @@ if CommandAvailable git; then
     alias git-last-body='git log --pretty=%b -1'
 fi
 
-if CommandAvailable "singleton.sh"; then
-    CommandAvailable cmus && alias cmus='singleton.sh cmus'
-    CommandAvailable rtorrent && alias rtorrent='singleton.sh rtorrent'
-fi
-
-if [ -n "$BBENV" ]; then
-    # Bloomberg aliases
-    [ ! `CommandAvailable chimera` ] && alias chimera="/etc/bb/chimera/chimera-tool"
-    [ ! `CommandAvailable getLevel` ] && alias getLevel='/bbsrc/bin/prod/bin/aotools/getLevel'
-
-    # for silencing emacs 24.4 dbus warning message
-    export NO_AT_BRIDGE=1
-
-    alias ddd="dpkg-distro-dev"
-    alias sd27="ssh sd27"
-    alias sd15="ssh sd15"
-    alias v3="ssh v383"
-    alias v4="ssh v384"
-    alias arcdiff='arc diff --cc hling --allow-untracked'
-    alias ddd='dpkg-distro-dev'
-    [ -f ~/.bbalias ] && . ~/.bbalias
-
-    PrefixPATH ~/mbig/bbgh/libexec/bbgh
-
-    autopr()
-    {
-        bbgh create-pr --title "$(git-last-subject)" \
-                       --body "$(git-last-body)" \
-                       $(git-this-origin):$(git-this-branch) \
-                       $(fxhub get-upstream | sed -e "s/.*://"):master
-    }
-fi
-
 # }}}
 # {{{ Global Variables
 
@@ -108,36 +68,5 @@ fi
 [ -n "$EDITOR" ] || export EDITOR="vim"
 [ -n "$PAGER" ] || export PAGER="less"
 
-MBIG="/home/ssobell/mbig"
-LINUX_DRQS=68544823
-
 # }}}
-# {{{ Terminfo magic
-
-if [ -n "$BBENV" ]; then
-
-    export TERMINFO="${HOME}/.terminfo/`uname -s`"
-
-    #if [ $TERM = "rxvt" ]; then
-    #    TERM=rxvt-unicode-256color
-    #fi
-
-    if [ ! "$TERM" = "screen-256color" ]; then
-        export TERM=xterm-256color
-    fi
-
-    export TERM
-fi
-
-# }}}
-# {{{ Miscellaneous
-
-if [ -n "$BBENV" ] && CommandAvailable hijackEOD.sh; then
-    . `which hijackEOD.sh`
-fi
-
-. ${HOME}/z/z.sh
-
-# }}}
-
 # vim: set foldmethod=marker:

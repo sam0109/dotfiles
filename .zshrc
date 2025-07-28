@@ -287,21 +287,6 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 #zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
 #zstyle '*' single-ignored show
 
-if [ -n "$BBENV" ]; then
-    compdef _gnu_generic plink
-    compdef _gnu_generic metalink
-    compdef _gnu_generic fsusage
-    compdef _gnu_generic comdb2sql
-    compdef _gnu_generic pwhat
-    compdef _gnu_generic dbx
-
-    zstyle ':completion:*:*:plink:*' file-patterns '*.mk'
-    zstyle ':completion:*:*:llcalc:*' file-patterns '*.mk'
-    zstyle ':completion:*:*:pwhat:*' file-patterns '*.tsk'
-    zstyle ':completion:*:*:cmt4:*' file-patterns '*.in'
-    zstyle ':completion:*:*:mm2swc:*' file-patterns '*.in'
-fi
-
 # }}}
 
 # vim: set foldmethod=marker:
